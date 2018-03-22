@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import logo from './logo.svg';
 import './App.css';
 
+import Version from  './version';
 import Test1 from './components/Test1/Test1';
 import Home from './components/Home';
 
@@ -15,7 +16,7 @@ class App extends Component {
           <div className="App">
             <header className="App-header">
               <img src={logo} className="App-logo" alt="logo" />
-              <h1 className="App-title">Welcome to Full stack react</h1>
+              <h1 className="App-title">Welcome to Full stack react build:{Version.buildNumber}</h1>
             </header>
             <nav>
               <Link to="/">Home</Link>
