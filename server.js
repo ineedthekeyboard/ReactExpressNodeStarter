@@ -17,7 +17,7 @@ if (!config.isDevelopment) {
     master: function () {
       console.log('Production Server Started.');
     },
-    start: startServerCluster
+    start: startServer
   });
 } else {
   console.log('Starting server in debug mode...no cluster');

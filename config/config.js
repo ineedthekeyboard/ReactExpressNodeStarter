@@ -14,12 +14,12 @@ config.express = {
 config.mongodb = {
     port: process.env.MONGODB_PORT || 27017,
     host: process.env.MONGODB_HOST || 'localhost',
-    db: process.env.MONGODB_DB || 'client',
-    uri: process.env.MONGODB_URI || 'mongodb://localhost:27017/client'
+    db: process.env.MONGODB_DB || 'reactFSStarter',
+    uri: process.env.MONGODB_URI || 'mongodb://localhost:27017/reactFSStarter'
 }
 if (PRODUCTION) {
     config.express.ip = '0.0.0.0'
     config.mongodb = {
-        uri: process.env.MONGODB_URI
+        uri: process.env.MONGODB_URI || 'mongodb://localhost:27017/reactFSStarter'
     }
 }

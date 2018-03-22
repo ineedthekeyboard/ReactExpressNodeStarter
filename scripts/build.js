@@ -79,19 +79,9 @@ measureFileSizesBeforeBuild(paths.appBuild)
         WARN_AFTER_BUNDLE_GZIP_SIZE,
         WARN_AFTER_CHUNK_GZIP_SIZE
       );
-      console.log();
-
-      const appPackage = require(paths.appPackageJson);
-      const publicUrl = paths.publicUrl;
-      const publicPath = config.output.publicPath;
-      const buildFolder = path.relative(process.cwd(), paths.appBuild);
-      printHostingInstructions(
-        appPackage,
-        publicUrl,
-        publicPath,
-        buildFolder,
-        useYarn
-      );
+      console.log(chalk.green("\nProduction Build Completed."));
+      console.log(chalk.cyan("Front end assests were compiled to the ./public folder in the project root directory."));
+      console.log(chalk.cyan("Start the production server with 'npm run startBackendProd'."));
     },
     err => {
       console.log(chalk.red('Failed to compile.\n'));
