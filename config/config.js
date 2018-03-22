@@ -7,7 +7,7 @@ config.isDevelopment = !PRODUCTION;
 config.WORKERS = process.env.WEB_CONCURRENCY || 1;
 config.express = {
     sslPort: 443,
-    port: process.env.PORT || 3500,
+    port: process.env.PORT || 3001,
     ip: process.env.IP || '127.0.0.1'
 }
 

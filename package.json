@@ -1,5 +1,5 @@
 {
-  "name": "ReactFullStackStarter",
+  "name": "reactfullstack",
   "version": "0.5.0",
   "private": true,
   "scripts": {
@@ -12,6 +12,7 @@
     "testClient": "node scripts/test.js --env=jsdom",
     "mongo-win": "C:\\Users\\Ryan\\Documents\\MongoDB\\Server\\3.4\\bin\\mongod.exe --config C:\\Users\\Ryan\\Documents\\MongoDB\\Server\\3.4\\bin\\mongodconf.txt"
   },
+  "proxy": "http://localhost:3001/",
   "jest": {
     "collectCoverageFrom": [
       "frontend/**/*.{js,jsx,mjs}"
@@ -110,6 +111,7 @@
     "react": "^16.2.0",
     "react-dev-utils": "^5.0.0",
     "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2",
     "style-loader": "0.19.0",
     "sw-precache-webpack-plugin": "0.11.4",
     "url-loader": "0.6.2",
