@@ -3,38 +3,61 @@
 /**
  * Module dependencies.
  */
-
-var app = require('./app');
+var config = require('./config/config');
+var app = require('./backend/app');
 var debug = require('debug')('sampleexpress:server');
 var http = require('http');
 
 var throng = require('throng');
-var WORKERS = process.env.WEB_CONCURRENCY || 1;
 
-throng({
-  workers: WORKERS,
-  lifetime: Infinity
-}, startServer);
+if (!config.isDevelopment) {
+  throng({
+    workers: config.WORKERS,
+    lifetime: Infinity,
+    master: function () {
+      console.log('Production Server Started.');
+    },
+    start: startServerCluster
+  });
+} else {
+  console.log('Starting server in debug mode...no cluster');
+  startServer();
+}
 
 function startServer() {
   /**
    * Get port from environment and store in Express.
   */
 
-  var port = normalizePort(process.env.PORT || '3000');
+  var port = normalizePort(config.express.port);
+  //var sslPort = normalizePort(config.express.sslPort);
+  
   app.set('port', port);
 
   /**
    * Create HTTP server.
    */
   var server = http.createServer(app);
+//TODO: move these to config file
+  //TODO: Enable SSL only
+  // var privateKey  = fs.readFileSync('server.key', 'utf8');
+  // var certificate = fs.readFileSync('server.crt', 'utf8');
+  // var credentials = {key: privateKey, cert: certificate};
+  // app.set('port', sslPort);
+  // var server2 = https.createServer(credentials, app);
+  
+  app.set('port', port);
+  var server = http.createServer(app);
 
   /**
    * Listen on provided port, on all network interfaces.
    */
 
+  // server2.listen(sslPort);
+  // server2.on('error', onError);
+  // server2.on('listening', onListening);
+
   server.listen(port);
-  console.log('Server started on:', port);
   server.on('error', onError);
   server.on('listening', onListening);
 
