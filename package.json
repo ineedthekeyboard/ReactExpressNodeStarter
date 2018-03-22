@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "startDev": "npm-run-all --parallel startClientDev startBackendDev",
-    "startProd": "npm-run-all buildClientProd startBackendProd",
+    "startProd": "npm-run-all cleanBuildFolder buildClientProd startBackendProd",
     "startBackendDev": "nodemon --inspect=127.0.0.1:9339 ./server.js",
     "startBackendProd": "cross-env NODE_ENV=production node ./server.js",
     "startClientDev": "node scripts/start.js",
     "buildClientProd": "node scripts/build.js",
     "testClient": "node scripts/test.js --env=jsdom",
+    "cleanBuildFolder":"rimraf public/*",
     "mongo-win": "C:\\Users\\Ryan\\Documents\\MongoDB\\Server\\3.4\\bin\\mongod.exe --config C:\\Users\\Ryan\\Documents\\MongoDB\\Server\\3.4\\bin\\mongodconf.txt"
   },
   "proxy": "http://localhost:3001/",

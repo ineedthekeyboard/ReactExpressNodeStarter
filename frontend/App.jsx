@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 
 import Version from  './version';
 import Test1 from './components/Test1/Test1';
