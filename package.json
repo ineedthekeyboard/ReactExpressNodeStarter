@@ -10,7 +10,7 @@
     "startClientDev": "node scripts/start.js",
     "buildClientProd": "node scripts/build.js",
     "testClient": "node scripts/test.js --env=jsdom",
-    "cleanBuildFolder":"rimraf public/*",
+    "cleanBuildFolder": "rimraf public/*",
     "mongo-win": "C:\\Users\\Ryan\\Documents\\MongoDB\\Server\\3.4\\bin\\mongod.exe --config C:\\Users\\Ryan\\Documents\\MongoDB\\Server\\3.4\\bin\\mongodconf.txt"
   },
   "proxy": "http://localhost:3001/",

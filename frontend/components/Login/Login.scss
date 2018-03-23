@@ -1,0 +1,8 @@
+.Login {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    .loginCard {
+        max-width: 500px;
+    }
+}
