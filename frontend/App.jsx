@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import CssBaseline from "material-ui/CssBaseline";
 import GlobalTheme from "./Theme";
@@ -17,11 +17,7 @@ class App extends Component {
           <CssBaseline />
           <div className="App">
             <NavBar/>
-            <nav>
-              <Link to="/">Home</Link>
-              <br></br>
-              <Link to="/login">Login</Link>
-            </nav>
+            <div className={height:'1rem',padding:'10rem'} />
             <div>
               <Route exact path="/" component={Home}/>
               <Route path="/login" component={Login}/>
