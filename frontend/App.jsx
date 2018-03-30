@@ -17,7 +17,6 @@ class App extends Component {
           <CssBaseline />
           <div className="App">
             <NavBar/>
-            <div style={{padding: '1rem', height:'1rem'}} />
             <div>
               <Route exact path="/" component={Home}/>
               <Route path="/login" component={Login}/>

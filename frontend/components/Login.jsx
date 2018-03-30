@@ -22,8 +22,7 @@ const styles = theme => ({
     gridItem: {
         margin: "auto",
         minWidth: "350px",
-        border: "1px solid black",
-        boxShadow: "inset 2px 3px 0px 0px red, 2px 3px 0px 0px black"
+        border: "1px solid " + theme.palette.primary.main
     },
     button: {
         margin: theme.spacing.unit
@@ -91,9 +90,10 @@ class Login extends React.Component {
         return (
             <div className={classes.root}>
                 <Grid container className={classes.grid}>
-                    <Grid item xs={6} className={classes.gridItem}>
+                    <Grid item sm={6} xs={11} className={classes.gridItem}>
                         <AppBar
                             position="static"
+                            elevation={1}
                             color={this.isLoginMode() ? "primary" : "secondary"}
                         >
                             <Toolbar>
@@ -102,7 +102,7 @@ class Login extends React.Component {
                                 </Typography>
                             </Toolbar>
                         </AppBar>
-                        <Paper className={classes.paper} elevation={4}>
+                        <Paper className={classes.paper} elevation={1}>
                             <form noValidate autoComplete="on">
                                 <Grid container>
                                     <Grid item xs={12}>

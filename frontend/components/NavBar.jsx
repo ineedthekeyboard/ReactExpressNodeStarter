@@ -13,7 +13,7 @@ import Menu, { MenuItem } from "material-ui/Menu";
 const styles = theme => ({
     root: {
         flexGrow: 1,
-        marginBottom:'0.5rem'
+        marginBottom:'1rem'
     },
     flex: {
         flex: 1
@@ -140,7 +140,7 @@ class MenuAppBar extends React.Component {
                             className={classes.flex}
                         >
                             <Link to="/" className={classes.a}>
-                                React Demo
+                                FSR Demo
                             </Link>
                         </Typography>
                         {auth && this.renderLoggedInButtons()}

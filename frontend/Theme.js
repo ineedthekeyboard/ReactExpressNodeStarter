@@ -26,33 +26,30 @@ export default (typeDef = "light") => {
                 root: {
                     height: "40px",
                     minHeight:"40px",
-                    border:"2px solid",
-                    fontFamily: "'Press Start 2P', cursive, sans"
+                    fontFamily: "'Roboto Condensed', sans-serif"
                 }
             },
             MuiToolbar: {
                 root: {
                     height: "40px !important",
                     minHeight:"40px !important",
-                    fontFamily: "'Press Start 2P', cursive, sans"
+                    fontFamily: "'Roboto Condensed', sans-serif"
                 } 
             },
             MuiTypography: {
                 title: {
-                    fontSize: "12px",
-                    fontFamily: "'Press Start 2P', cursive, sans"
+                    fontFamily: "'Roboto Condensed', sans-serif"
                 }
             },
             MuiInput: {
                 root: {
-                    fontSize: "9px",
-                    fontFamily: "'Press Start 2P', cursive, sans"
+                    fontSize: "12px",
+                    fontFamily: "'IBM Plex Mono', sans-serif"
                 }
             },
             MuiButton: {
                 label: {
-                    fontSize: "9px",
-                    fontFamily: "'Press Start 2P', cursive, sans"
+                    fontFamily: "'Roboto Condensed', sans-serif"
                 }
             }
         }
