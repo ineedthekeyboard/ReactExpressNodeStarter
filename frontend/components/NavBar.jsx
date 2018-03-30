@@ -12,7 +12,8 @@ import Menu, { MenuItem } from "material-ui/Menu";
 
 const styles = theme => ({
     root: {
-        flexGrow: 1
+        flexGrow: 1,
+        marginBottom:'0.5rem'
     },
     flex: {
         flex: 1
@@ -29,6 +30,9 @@ const styles = theme => ({
     a: {
         textDecoration: 'none',
         color: 'inherit'
+    },
+    icon: {
+        height: '40px'
     }
 });
 
@@ -128,7 +132,7 @@ class MenuAppBar extends React.Component {
 
         return (
             <div className={classes.root}>
-                <AppBar position="static">
+                <AppBar position="static" elevation={0}>
                     <Toolbar>
                         <Typography
                             variant="title"

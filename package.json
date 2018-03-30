@@ -16,7 +16,7 @@
   "proxy": "http://localhost:3001/",
   "jest": {
     "collectCoverageFrom": [
-      "frontend/**/*.{js,jsx,mjs}"
+      "<rootDir>/frontend/**/*.{js,jsx,mjs}"
     ],
     "setupFiles": [
       "<rootDir>/config/polyfills.js"

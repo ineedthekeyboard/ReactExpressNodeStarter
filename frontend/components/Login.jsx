@@ -17,11 +17,13 @@ const styles = theme => ({
     paper: {
         padding: theme.spacing.unit * 2,
         textAlign: "center",
-        color: theme.palette.text.secondary
+        color: theme.palette.text.secondary,
     },
     gridItem: {
         margin: "auto",
-        minWidth: "350px"
+        minWidth: "350px",
+        border: "1px solid black",
+        boxShadow: "inset 2px 3px 0px 0px red, 2px 3px 0px 0px black"
     },
     button: {
         margin: theme.spacing.unit
@@ -88,7 +90,7 @@ class Login extends React.Component {
         const isRegistrationMode = !this.isLoginMode();
         return (
             <div className={classes.root}>
-                <Grid container spacing={24} className={classes.grid}>
+                <Grid container className={classes.grid}>
                     <Grid item xs={6} className={classes.gridItem}>
                         <AppBar
                             position="static"
