@@ -9,6 +9,7 @@ import AppBar from "material-ui/AppBar";
 import Toolbar from "material-ui/Toolbar";
 import Typography from "material-ui/Typography";
 import Grow from "material-ui/transitions/Grow";
+import { API, Endpoints } from "../services/index";
 
 const styles = theme => ({
     root: {
@@ -43,7 +44,7 @@ class Login extends React.Component {
         // };
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         //After mount
     }
     componentWillUnmount() {
@@ -62,7 +63,7 @@ class Login extends React.Component {
                 [name]: event.target.value
             }
         });
-    };
+    }
     changeMode = () => {
         if (this.state.mode === "login") {
             this.setState({ mode: "register" });
@@ -70,10 +71,32 @@ class Login extends React.Component {
             this.setState({ mode: "login" });
         }
         // this.props.onModeChange ? this.props.onModeChange(this.state.mode) : false;
-    };
-    login = () => {
+    }
+    mainButton = () => {
+        if (this.isLoginMode()) {
+            this.login();
+        } else {
+            this.register();
+        }
+    }
+    login = async () => {
         console.log(this.state.user);
-    };
+        try {
+            let loggedInData = await API.post(Endpoints('Users.login'), {
+                email: this.state.user.email,
+                password: this.state.user.password
+            });
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    register = async () => {
+        try {
+            let loggedInData = await API.post(Endpoints('Users.register'), this.state.user);
+        } catch (e) {
+            console.log(e);
+        }
+    }
     getMode(inverse) {
         if (inverse) {
             return this.isLoginMode() ? "Register" : "Login";
@@ -107,12 +130,12 @@ class Login extends React.Component {
                                 <Grid container>
                                     <Grid item xs={12}>
                                         <TextField
-                                            label="User ID"
-                                            id="username"
-                                            type="text"
+                                            label="Email"
+                                            id="email"
+                                            type="email"
                                             autoComplete="username"
-                                            value={user.username}
-                                            onChange={this.handleInputChange("username")}
+                                            value={user.email}
+                                            onChange={this.handleInputChange("email")}
                                             className={classes.textField}
                                             margin="dense"
                                         />
@@ -147,12 +170,11 @@ class Login extends React.Component {
                                                         margin="dense"
                                                     />
                                                     <TextField
-                                                        label="Email"
-                                                        id="email"
-                                                        type="email"
-                                                        autoComplete="email"
-                                                        value={user.email}
-                                                        onChange={this.handleInputChange("email")}
+                                                        label="User ID"
+                                                        id="username"
+                                                        type="text"
+                                                        value={user.username}
+                                                        onChange={this.handleInputChange("username")}
                                                         className={classes.textField}
                                                         margin="dense"
                                                     />
@@ -175,7 +197,7 @@ class Login extends React.Component {
                                             variant="raised"
                                             color="primary"
                                             className={classes.button}
-                                            onClick={this.login}
+                                            onClick={this.mainButton}
                                         >
                                             {this.getMode()}
                                         </Button>

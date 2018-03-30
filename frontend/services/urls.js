@@ -1,9 +1,11 @@
 const URLS = {
     Users: {
         POST: "/users",
-        GET: "/users/:id",
-        UPDATE: "/users/:id",
-        DELETE: "/users/:id"
+        GET: "/users/:email",
+        UPDATE: "/users/:email",
+        DELETE: "/users/:email",
+        login: "/users/login",
+        register: "/users/register"
     }
 };
 

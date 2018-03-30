@@ -1,6 +1,7 @@
 module.exports = {
     'schema': {
         'email': { type: String, index: true, unique: true, required: true },
+        'username': { type: String, required: false },
         'password': {type: String, default: ''},
         'salt': {type: String, default: ''},
         'fullname': {type: String, default: ''},

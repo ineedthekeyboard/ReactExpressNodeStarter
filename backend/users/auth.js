@@ -38,9 +38,13 @@ authentication.register = async function (req, res, next) {
                 password = req.body.password,
                 randomId, userExists = false,
                 saltHash;
+            if (!email || !password) {
+                return res.status(400).json({ status: 'Incorrect Params' }); //Don't actually use different statuss in production
+            }
             //Add User to *DB*
             saltHash = await authentication.generateSecureHash(password);
             newUser.fullname = req.body.fullname;
+            newUser.username = req.body.username;
             newUser.address = req.body.address;
             newUser.occupation = req.body.occupation;
             newUser.age = req.body.age;
@@ -57,22 +61,24 @@ authentication.register = async function (req, res, next) {
 //For login after registration and just plain login:
 authentication.issueJWT = async function(req, res, next) {
     if(req.body.email && req.body.password) {
-        var username = req.body.email;
+        var email = req.body.email;
         var password = req.body.password;
     }
-    if (!username || !password) {
+    if (!email || !password) {
         return res.status(400).json({ status: 'Incorrect Params' }); //Don't actually use different statuss in production
     }
-    user = await db.users.findByEmail(username);
+    user = await db.users.findByEmail(email);
     if (user) {
-        //Verify username and pass
+        //Verify email and pass
         isCorrect = await authentication.compareHash(password, user.salt, user.password);
         if (isCorrect) {
             var payload = { id: user.email };
             var token = jwt.sign(payload, config.secretJWTKey, { expiresIn: '60m' });
-            return res.json({status: "ok", user: {token, email:user.email}});
+            let { password, salt, ...nonSens } = user._doc;
+            user = Object.assign({}, { token: token }, nonSens);
+            return res.json({status: "ok", user: user});
         } else { //Failed verification check
-            return res.status(418).json({ status: 'Incorrect username or password.' });
+            return res.status(403).json({ status: 'Incorrect email or password.' });
         }
     } else { //User does not exist: failed
         return res.status(403).json({ status: 'User does not exist.' });
