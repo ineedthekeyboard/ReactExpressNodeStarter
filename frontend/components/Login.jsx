@@ -9,6 +9,9 @@ import AppBar from "material-ui/AppBar";
 import Toolbar from "material-ui/Toolbar";
 import Typography from "material-ui/Typography";
 import Grow from "material-ui/transitions/Grow";
+
+import { Redirect } from 'react-router';
+
 import { API, Endpoints } from "../services/index";
 
 const styles = theme => ({
@@ -38,10 +41,7 @@ const styles = theme => ({
 class Login extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { user: {}, ...props };
-        // this.propTypes = {
-        //   classes: PropTypes.object.isRequired
-        // };
+        this.state = { mode: 'login', user: {}, ...props };
     }
 
     async componentDidMount() {
@@ -50,12 +50,6 @@ class Login extends React.Component {
     componentWillUnmount() {
         //After Unmount
     }
-    // updateField = e => {
-    //   this.setState({ name: e.target.value });
-    // };
-    // sendUpdate = e => {
-    //   this.props.fieldUpdated(this.state.name);
-    // };
     handleInputChange = name => event => {
         this.setState({
             user: {
@@ -70,31 +64,41 @@ class Login extends React.Component {
         } else {
             this.setState({ mode: "login" });
         }
-        // this.props.onModeChange ? this.props.onModeChange(this.state.mode) : false;
     }
-    mainButton = () => {
+    mainButton = async () => {
+        let user;
         if (this.isLoginMode()) {
-            this.login();
+            user = await this.login();
         } else {
-            this.register();
+            user = await this.register();
+        }
+        if (user) { 
+            this.setState({'userInformation': user });
+            this.props.stateUpdater({ user: user });
+            <Redirect to="/" />
+        } else {
+            console.log("login or register error");
         }
     }
     login = async () => {
-        console.log(this.state.user);
         try {
             let loggedInData = await API.post(Endpoints('Users.login'), {
                 email: this.state.user.email,
                 password: this.state.user.password
             });
+            return loggedInData.user;
         } catch (e) {
             console.log(e);
+            return false;
         }
     }
     register = async () => {
         try {
             let loggedInData = await API.post(Endpoints('Users.register'), this.state.user);
+            return loggedInData.user;
         } catch (e) {
             console.log(e);
+            return false;
         }
     }
     getMode(inverse) {
@@ -108,7 +112,6 @@ class Login extends React.Component {
     }
     render() {
         const classes = this.props.classes;
-        const user = this.state.user;
         const isRegistrationMode = !this.isLoginMode();
         return (
             <div className={classes.root}>
@@ -130,11 +133,12 @@ class Login extends React.Component {
                                 <Grid container>
                                     <Grid item xs={12}>
                                         <TextField
+                                            fullWidth={true}
+                                            required
                                             label="Email"
                                             id="email"
                                             type="email"
                                             autoComplete="username"
-                                            value={user.email}
                                             onChange={this.handleInputChange("email")}
                                             className={classes.textField}
                                             margin="dense"
@@ -143,12 +147,8 @@ class Login extends React.Component {
                                             label="Password"
                                             id="password"
                                             type="password"
-                                            // Just to show how to control errors
-                                            error={isRegistrationMode}
-                                            helperText={isRegistrationMode ? "Bad" : ""}
-                                            //** */
+                                            required
                                             autoComplete="current-password"
-                                            value={user.password}
                                             onChange={this.handleInputChange("password")}
                                             className={classes.textField}
                                             margin="dense"
@@ -164,7 +164,6 @@ class Login extends React.Component {
                                                         label="Confirm Password"
                                                         id="confPassword"
                                                         type="password"
-                                                        value={user.confPassword}
                                                         onChange={this.handleInputChange("confPassword")}
                                                         className={classes.textField}
                                                         margin="dense"
@@ -173,7 +172,6 @@ class Login extends React.Component {
                                                         label="User ID"
                                                         id="username"
                                                         type="text"
-                                                        value={user.username}
                                                         onChange={this.handleInputChange("username")}
                                                         className={classes.textField}
                                                         margin="dense"

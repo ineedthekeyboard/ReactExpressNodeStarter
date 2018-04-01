@@ -37,19 +37,22 @@ const styles = theme => ({
 });
 
 class MenuAppBar extends React.Component {
-    state = {
-        auth: false,
-        anchorEl: null
-    };
-
-    handleChange = (event, checked) => {
-        this.setState({ auth: checked });
-    };
+    
+    constructor(props) {
+        super(props);
+        this.state = {
+            user: this.props.user,
+            anchorEl: null
+        };
+    }
 
     handleMenu = event => {
         this.setState({ anchorEl: event.currentTarget });
     };
-
+    logoutUser = () => {
+        this.props.stateUpdater({ user: {} });
+        this.handleClose();
+    }
     handleClose = () => {
         this.setState({ anchorEl: null });
     };
@@ -103,7 +106,7 @@ class MenuAppBar extends React.Component {
                     >
                         <MenuItem onClick={this.handleClose}>Profile</MenuItem>
                         <MenuItem onClick={this.handleClose}>My account</MenuItem>
-                        <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+                        <MenuItem onClick={this.logoutUser}>Logout</MenuItem>
                     </Menu>
                 </div>
             );
@@ -127,8 +130,8 @@ class MenuAppBar extends React.Component {
             );
     }
     render() {
-        const { classes } = this.props;
-        const { auth } = this.state;
+        const { classes, user } = this.props;
+        const auth = (user.token && user.token !== '') ? true : false;
 
         return (
             <div className={classes.root}>
@@ -140,7 +143,7 @@ class MenuAppBar extends React.Component {
                             className={classes.flex}
                         >
                             <Link to="/" className={classes.a}>
-                                FSR Demo
+                                FSR Demo - {user.email ? user.email : null}
                             </Link>
                         </Typography>
                         {auth && this.renderLoggedInButtons()}

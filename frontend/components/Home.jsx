@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 
 class Home extends Component {
   render() {
+    const {user} = this.props;
     return (
         <div>
-          Homepage
+          Homepage for {user.email}
         </div>
     );
   }
