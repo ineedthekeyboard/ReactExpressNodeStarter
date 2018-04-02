@@ -7,6 +7,7 @@ import Toolbar from "material-ui/Toolbar";
 import Typography from "material-ui/Typography";
 import Icon from "material-ui/Icon";
 import IconButton from "material-ui/IconButton";
+import Button from 'material-ui/Button';
 import Tooltip from "material-ui/Tooltip";
 import Menu, { MenuItem } from "material-ui/Menu";
 
@@ -30,6 +31,12 @@ const styles = theme => ({
     a: {
         textDecoration: 'none',
         color: 'inherit'
+    },
+    icon: {
+        margin:"0 .35rem 0 0"
+    },
+    button: {
+        fontSize:".8rem"
     }
 });
 
@@ -95,13 +102,10 @@ class MenuAppBar extends React.Component {
                 <div>
                 <Link to="/login" className={classes.a}>
                         <Tooltip id="tooltip-alerts" title="Login">
-                            <IconButton
-                                color="inherit"
-                                className={classes.button}
-                                aria-label="Login"
-                            >
-                                <Icon>launch</Icon>
-                            </IconButton>
+                            <Button aria-label="Login" className={classes.button} color="inherit" size="small">
+                                <Icon className={classes.icon}>input</Icon>
+                                Login
+                            </Button>
                         </Tooltip>
                     </Link>
                 </div>

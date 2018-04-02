@@ -202,6 +202,7 @@ class Login extends React.Component {
                                             )}
                                     </Grid>
                                     <Grid item xs={12}>
+                                        {!isRegistrationMode ? (
                                         <Button
                                             variant="raised"
                                             color="secondary"
@@ -209,7 +210,7 @@ class Login extends React.Component {
                                             onClick={this.changeMode}
                                         >
                                             {this.getMode(true)}
-                                        </Button>
+                                        </Button>):("")}
                                         <Button
                                             variant="raised"
                                             color="primary"
