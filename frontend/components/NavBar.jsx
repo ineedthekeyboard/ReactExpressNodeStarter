@@ -30,9 +30,6 @@ const styles = theme => ({
     a: {
         textDecoration: 'none',
         color: 'inherit'
-    },
-    icon: {
-        height: '40px'
     }
 });
 
@@ -62,24 +59,6 @@ class MenuAppBar extends React.Component {
         const open = Boolean(anchorEl);
         return (
                 <div>
-                    <Tooltip id="tooltip-alerts" title="Alerts">
-                        <IconButton
-                            color="inherit"
-                            className={classes.button}
-                            aria-label="Add an alarm"
-                        >
-                            <Icon>alarm</Icon>
-                        </IconButton>
-                    </Tooltip>
-                    <Tooltip id="tooltip-alerts" title="Ticker Charts">
-                        <IconButton
-                            color="inherit"
-                            className={classes.button}
-                            aria-label="Ticker Charts"
-                        >
-                            <Icon>timeline</Icon>
-                        </IconButton>
-                    </Tooltip>
                     <Tooltip id="tooltip-alerts" title="User Info">
                         <IconButton
                             aria-owns={open ? "menu-appbar" : null}
@@ -104,7 +83,6 @@ class MenuAppBar extends React.Component {
                         open={open}
                         onClose={this.handleClose}
                     >
-                        <MenuItem onClick={this.handleClose}>Profile</MenuItem>
                         <MenuItem onClick={this.handleClose}><Link to="/account" className={classes.a}>My account</Link></MenuItem>
                         <MenuItem onClick={this.logoutUser}>Logout</MenuItem>
                     </Menu>
@@ -120,7 +98,7 @@ class MenuAppBar extends React.Component {
                             <IconButton
                                 color="inherit"
                                 className={classes.button}
-                                aria-label="Add an alarm"
+                                aria-label="Login"
                             >
                                 <Icon>launch</Icon>
                             </IconButton>
@@ -135,7 +113,7 @@ class MenuAppBar extends React.Component {
 
         return (
             <div className={classes.root}>
-                <AppBar position="static" elevation={0}>
+                <AppBar position="static">
                     <Toolbar>
                         <Typography
                             variant="title"
