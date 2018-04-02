@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "material-ui/styles";
+import { withRouter } from "react-router-dom";
 import Paper from "material-ui/Paper";
 import Grid from "material-ui/Grid";
 import Button from "material-ui/Button";
@@ -10,7 +11,6 @@ import Toolbar from "material-ui/Toolbar";
 import Typography from "material-ui/Typography";
 import Grow from "material-ui/transitions/Grow";
 
-import { Redirect } from 'react-router';
 
 import { API, Endpoints } from "../services/index";
 
@@ -41,7 +41,7 @@ const styles = theme => ({
 class Login extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { mode: 'login', user: {}, ...props };
+        this.state = { mode: 'login', user: {} };
     }
 
     async componentDidMount() {
@@ -72,10 +72,9 @@ class Login extends React.Component {
         } else {
             user = await this.register();
         }
-        if (user) { 
-            this.setState({'userInformation': user });
+        if (user) {
             this.props.stateUpdater({ user: user });
-            <Redirect to="/" />
+            this.props.history.push("/account");
         } else {
             console.log("login or register error");
         }
@@ -113,6 +112,29 @@ class Login extends React.Component {
     render() {
         const classes = this.props.classes;
         const isRegistrationMode = !this.isLoginMode();
+        const userIsLoggedIn = (this.props.user && this.props.user.token && this.props.user.token !== '') ? true : false;
+        if (userIsLoggedIn) {
+            // this.props.history.push("/");
+            return (
+                <div className={classes.root}>
+                    <Grid container className={classes.grid}>
+                        <Grid item sm={6} xs={11} className={classes.gridItem}>
+                            <AppBar
+                                position="static"
+                                elevation={6}
+                                color={"secondary"}
+                            >
+                                <Toolbar>
+                                    <Typography variant="title" color="inherit">
+                                        You are logged in.
+                                    </Typography>
+                                </Toolbar>
+                            </AppBar>
+                        </Grid>
+                    </Grid>
+                </div>
+            );
+        }
         return (
             <div className={classes.root}>
                 <Grid container className={classes.grid}>
@@ -212,4 +234,6 @@ class Login extends React.Component {
 Login.propTypes = {
     page: PropTypes.string
 };
-export default withStyles(styles)(Login);
+let stylesWrap = withStyles(styles)(Login);
+let routeWrap = withRouter(stylesWrap);
+export default routeWrap;

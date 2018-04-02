@@ -105,7 +105,7 @@ class MenuAppBar extends React.Component {
                         onClose={this.handleClose}
                     >
                         <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                        <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                        <MenuItem onClick={this.handleClose}><Link to="/account" className={classes.a}>My account</Link></MenuItem>
                         <MenuItem onClick={this.logoutUser}>Logout</MenuItem>
                     </Menu>
                 </div>
@@ -143,7 +143,7 @@ class MenuAppBar extends React.Component {
                             className={classes.flex}
                         >
                             <Link to="/" className={classes.a}>
-                                FSR Demo - {user.email ? user.email : null}
+                                FSR Demo
                             </Link>
                         </Typography>
                         {auth && this.renderLoggedInButtons()}

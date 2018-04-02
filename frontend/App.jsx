@@ -8,6 +8,7 @@ import GlobalTheme from "./Theme";
 // import Version from  './version';
 import NavBar from "./components/NavBar";
 import Home from './components/Home';
+import Account from './components/Account';
 import Login from './components/Login';
 
 class App extends Component {
@@ -34,8 +35,9 @@ class App extends Component {
           <div className="App">
             <NavBar user={state.user} stateUpdater={this.props.setAppState}/>
             <div>
-              <Route exact path="/" component={() => this.checkAuth(<Home stateUpdater={this.props.setAppState} user={state.user}/>)}/>
-              <Route path="/login" render={() => <Login stateUpdater={this.props.setAppState} />}/>
+              <Route exact path="/" component={() => <Home stateUpdater={this.props.setAppState} user={state.user}/>}/>
+              <Route path="/login" render={() => <Login user={state.user} stateUpdater={this.props.setAppState} />}/>
+              <Route path="/account" component={() => this.checkAuth(<Account stateUpdater={this.props.setAppState} user={state.user}/>)}/>
             </div>
           </div>
         </MuiThemeProvider>

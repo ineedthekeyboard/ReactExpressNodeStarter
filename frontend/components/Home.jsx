@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 
 class Home extends Component {
   render() {
-    const {user} = this.props;
     return (
         <div>
-          Homepage for {user.email}
+          This is the homepage, it is not a protected route.
         </div>
     );
   }

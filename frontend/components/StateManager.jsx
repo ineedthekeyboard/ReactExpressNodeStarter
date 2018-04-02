@@ -10,8 +10,6 @@ class StateManager extends Component {
     }
 
     setAppState(updater, callback) {
-        // newState can be object or function!
-        debugger;
         this.setState(updater, () => {
             if (this.props.debug) {
                 console.log('setAppState', JSON.stringify(this.state));
